@@ -1,15 +1,17 @@
+import React from 'react';
 
-import './App.css'
-import Encabezado from './encabezado'
+import Header from './components/header';
+import McDonalds from './components/McDonalds';
+
+
+
 function App() {
-  let curso="Curso de React!!!"
-  let alumnos =30;
+  let curso="Curso de React JS!"
+  let alumnos =50;
   return (
     <>
-      <Encabezado/>
-      <h3>{curso}</h3>
-      <p>alumnos:{alumnos *2}</p>
-      <Encabezado/>
+      <Header/>
+      <McDonalds/>
     </>
 
   )
