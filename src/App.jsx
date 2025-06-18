@@ -2,6 +2,12 @@ import React from 'react';
 
 import Header from './components/header';
 import McDonalds from './components/McDonalds';
+import Banners from './components/Banner';
+import Servicios from './components/Servicios';
+import PedirPorApps from './components/PedirPorApps';
+import Registrate from './components/registrare';
+
+
 
 
 
@@ -12,6 +18,10 @@ function App() {
     <>
       <Header/>
       <McDonalds/>
+      <Banners/>
+      <Servicios/>
+      <PedirPorApps/>
+      <Registrate/>
     </>
 
   )

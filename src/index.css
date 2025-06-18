@@ -4,3 +4,8 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+.estiloRosa{
+  color:rgb(236, 198, 198);
+  background-color: black;
+  padding: 20px;
+}
