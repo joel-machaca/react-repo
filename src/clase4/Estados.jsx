@@ -1,18 +1,18 @@
 import { useState } from "react"
 
 const Estados=()=>{
+    let textoVar="hace click aqui! (var)"
+    const[textoBoton, setTextoBoton]= useState("hace click aqui!(state)")
 
-    let textoVar= "Haz clic aqui!!!#1(var)"
 
-    const [textoBoton, setTextoBoton]= useState("Haz clic aqui!!!#2(state)")
 
     const modificarTextoVariable=()=>{
-        console.log("se ejecuto pero no funcion")
-        textoVar="gracias por hacer click#1(var)"
+        console.log("estoy aca variable")
+        textoVar="gracias por hacer click! (var)"
     }
-
     const modificarTextoEstado=()=>{
-        setTextoBoton("gracias por hacer click#2(state)")
+        console.log("estoy aca state")
+        setTextoBoton("gracias por hacer click (state)");
     }
 
     return(

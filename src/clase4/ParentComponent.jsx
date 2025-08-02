@@ -1,6 +1,6 @@
 const ParentComponent=({texto})=>{
-    const handleClick = (texto)=>{
-        console.log(texto)
+    const handleClick = (textoP)=>{
+        console.log(textoP)
     }
     return(
         <Boton callback={()=>{handleClick(texto)}}/>

@@ -74,8 +74,8 @@ const SugarSyntax=()=>{
 
 
     // JSX
-    let texto="Hola a todos!!!"
-    let precio=2000;
+    // let texto="Hola a todos!!!"
+    // let precio=2000;
     // let edad=14
 
 

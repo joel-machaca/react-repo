@@ -26,9 +26,9 @@ const Contador=()=>{
                 <div className="col">
                     <h1>Contador</h1>
                     <div className="btn-group" role="group" aria-label="Basic example">
-                        <button type="button" className="btn btn-secondary" onClick={decrementar}> - </button>
-                        <button type="button" className="btn btn-secondary">{counter}</button>
-                        <button type="button" className="btn btn-secondary"onClick={incrementar}> + </button>
+                        <button type="button" className="btn btn-dark" onClick={decrementar}> - </button>
+                        <button type="button" className="btn btn-ligth shadow">{counter}</button>
+                        <button type="button" className="btn btn-dark" onClick={incrementar}> + </button>
                     </div>
                 </div>
             </div>
