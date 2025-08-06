@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huaca Pucllana - Cocina Peruana Tradicional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variables y Estilos Generales */
+        :root {
+            --color-fondo: #0a0a0a;
+            --color-amarillo-claro: #ffc107;
+            --color-amarillo-oscuro: #e0ac00;
+            --color-blanco: #ffffff;
+            --color-translucido: rgba(255, 255, 255, 0.1);
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Roboto', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-body);
+            color: var(--color-blanco);
+            background-color: var(--color-fondo);
+            line-height: 1.6;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-amarillo-claro);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: var(--color-blanco);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-amarillo-claro);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background-image: url('https://cloudfront-eu-central-1.images.arcpublishing.com/prisa/R3EGCNNVXNCTVK4OVUE4FGPSZQ.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 50%;
+            padding: 0 3rem;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            color: var(--color-amarillo-claro);
+            margin-bottom: 0.5rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+                
+        .navbar .btn-reservar {
+            background-color: var(--color-amarillo-claro);
+            color: var(--color-blanco); /* !important para asegurar que el color sea oscuro */
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        
+        .navbar .btn-reservar:hover {
+            background-color: var(--color-amarillo-oscuro);
+            transform: translateY(-2px);
+            color: var(--color-fondo)
+        }
+
+        .hero-buttons .btn-primary, .hero-buttons .btn-secondary {
+            display: inline-block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .hero-buttons .btn-primary {
+            background-color: var(--color-amarillo-claro);
+            color: var(--color-fondo);
+            margin-right: 1rem;
+        }
+
+        .hero-buttons .btn-primary:hover {
+            background-color: var(--color-amarillo-oscuro);
+        }
+
+        .hero-buttons .btn-secondary {
+            background-color: transparent;
+            color: var(--color-blanco);
+            border: 2px solid var(--color-amarillo-claro);
+        }
+
+        .hero-buttons .btn-secondary:hover {
+            background-color: var(--color-amarillo-claro);
+            color: var(--color-fondo);
+        }
+
+        /* --- Secciones de Contenido (Genéricas) --- */
+        .section {
+            padding: 5rem 3rem;
+            text-align: center;
+        }
+
+        .section h2 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            color: var(--color-amarillo-claro);
+            margin-bottom: 3rem;
+        }
+
+        /* --- Platos Destacados --- */
+        .dishes-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .dish-card {
+            flex: 1;
+            max-width: 350px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--color-translucido);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .dish-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .dish-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .dish-card .card-content {
+            padding: 1.5rem;
+        }
+
+        .dish-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            color: var(--color-amarillo-claro);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+
+        .dish-card p {
+            font-size: 1rem;
+            color: var(--color-blanco);
+            opacity: 0.8;
+        }
+
+        /* --- Sobre Nosotros --- */
+        #sobre-nosotros {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            text-align: left;
+        }
+
+        #sobre-nosotros img {
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        #sobre-nosotros .text-content {
+            width: 50%;
+        }
+
+        /* --- Galería --- */
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        /* --- Testimonios --- */
+        .testimonials-container {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .testimonial-card {
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-card .author {
+            font-weight: 700;
+            color: var(--color-amarillo-claro);
+        }
+
+        /* --- Footer --- */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #000;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.7;
+        }
+
+        /* --- Diseño Adaptable (Responsive) --- */
+        @media (max-width: 1024px) {
+            .hero-content h1 {
+                font-size: 4rem;
+            }
+            .hero-content {
+                max-width: 80%;
+            }
+            .dishes-container, .gallery-container, .testimonials-container, #sobre-nosotros {
+                flex-direction: column;
+                align-items: center;
+            }
+            #sobre-nosotros img, #sobre-nosotros .text-content {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+            }
+            .nav-links {
+                margin-top: 1rem;
+            }
+            .nav-links a {
+                margin: 0 0.5rem;
+            }
+            .hero {
+                text-align: center;
+            }
+            .hero-content {
+                max-width: 90%;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .hero-buttons {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero" id="inicio">
+        <div class="navbar">
+            <a href="#inicio" class="logo">Huaca Pucllana</a>
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#menu">Menú</a>
+                <a href="#">Login</a>
+                <a href="#" class="btn-reservar">Reservar</a>
+            </nav>
+        </div>
+        <div class="hero-content">
+            <h1>Huaca Pucllana</h1>
+            <p>Donde la historia se encuentra con el sabor. Sabores auténticos del Perú en un entorno inigualable.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn-primary">Ver Menú</a>
+                <a href="#" class="btn-secondary">Reservar</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="menu">
+        <h2>Sabores Destacados</h2>
+        <div class="dishes-container">
+            <div class="dish-card">
+                <img src="https://portal.andina.pe/EDPfotografia/Thumbnail/2015/06/28/000300772W.jpg" alt="Ceviche Clásico">
+                <div class="card-content">
+                    <h3>Ceviche Clásico</h3>
+                    <p>Fresco pescado marinado en leche de tigre con toques de ají limo, cebolla roja y culantro.</p>
+                </div>
+            </div>
+            <div class="dish-card">
+                <img src="https://www.peru.travel/Contenido/General/Imagen/es/76/1.1/lomo-saltado.jpg" alt="Lomo Saltado">
+                <div class="card-content">
+                    <h3>Lomo Saltado</h3>
+                    <p>Trozos de lomo de res salteados con cebolla, tomate, ají amarillo y un toque de sillao. Servido con papas fritas.</p>
+                </div>
+            </div>
+            <div class="dish-card">
+                <img src="https://tofuu.getjusto.com/orioneat-local/resized2/mLGE2QrSNPcYWR6HW-2400-x.webp" alt="Aji de Gallina">
+                <div class="card-content">
+                    <h3>Ají de Gallina</h3>
+                    <p>Delicado y cremoso guiso de gallina deshilachada en salsa de ají amarillo, servido con arroz y huevo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="nosotros">
+        <h2>Nuestra Historia</h2>
+        <div id="sobre-nosotros">
+            <img src="https://e00-telva.uecdn.es/assets/multimedia/imagenes/2018/02/14/15186225238424.jpg" alt="Huaca Pucllana">
+            <div class="text-content">
+                <h3 style="color:#ffc107">Un Viaje a las Raíces del Sabor Peruano</h3>
+                <p>En Huaca Pucllana, honramos la rica herencia culinaria del Perú. Cada plato es un tributo a las tradiciones de nuestra tierra, utilizando ingredientes frescos y técnicas ancestrales para crear una experiencia gastronómica que deleita los sentidos y cuenta una historia. Nuestro restaurante se sitúa en un entorno mágico que fusiona el pasado y el presente.</p>
+                <p>Invitamos a nuestros comensales a un viaje culinario que resalta la diversidad de sabores, texturas y colores que hacen única a la cocina peruana. Desde la costa hasta la sierra, cada bocado es un descubrimiento.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="galeria">
+        <h2>Nuestra Galería</h2>
+        <div class="gallery-container">
+            <div class="gallery-item"><img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2e/b9/15/9e/salon-principal.jpg" alt="Ambiente del restaurante"></div>
+            <div class="gallery-item"><img src="https://upload.wikimedia.org/wikipedia/commons/2/27/Pisco_sour_20100613b.JPG" alt="Pisco Sour"></div>
+            <div class="gallery-item"><img src="https://portal.andina.pe/EDPfotografia2/Thumbnail/2012/09/22/000191906W.jpg" alt="Chef"></div>
+            <div class="gallery-item"><img src="https://www.peru.travel/Contenido/General/Imagen/es/349/1.1/mazamorra.jpg" alt="Postre peruano"></div>
+            <div class="gallery-item"><img src="https://envanature.com/blog/wp-content/uploads/2022/12/empty-table-and-chair-in-restaurant-2022-02-02-05-05-51-utc-scaled.jpg" alt="Mesa de restaurante"></div>
+            <div class="gallery-item"><img src="https://www.peru.travel/Contenido/General/Imagen/es/500/1.1/Barranco_distrito_portada.jpg" alt="Vista nocturna"></div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonios">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <div class="testimonials-container">
+            <div class="testimonial-card">
+                <p>"Una experiencia culinaria inolvidable. El lomo saltado es el mejor que he probado en mi vida. ¡Volveré sin duda!"</p>
+                <div class="author">- Ana R.</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"El ambiente es mágico, y cada plato es una obra de arte. La atención es de primera. Muy recomendado."</p>
+                <div class="author">- Carlos M.</div>
+            </div>
+            <div class="testimonial-card">
+                <p>"Fui con mi familia y todos quedamos encantados. El ají de gallina me recordó a la cocina de mi abuela. Un verdadero sabor a hogar."</p>
+                <div class="author">- Sofía P.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2025 Huaca Pucllana. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
