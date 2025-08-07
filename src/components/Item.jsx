@@ -1,8 +1,4 @@
 const Item =({item})=>{
-    console.log("esoty en item");
-    console.log(item);
-    
-    
     return(
         <div className="col-md-3 mb-4">
             <div className="card border-0 text-center shadow">
