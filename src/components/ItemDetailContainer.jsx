@@ -1,21 +1,22 @@
 import { useEffect, useState } from "react";
 import productos from "../assets/productos.json"
+import { useParams } from "react-router-dom";
 const ItemDetailContainer=()=>{
     
     const [item,setItem]= useState([])
-    const promesa = new Promise((resolve=>{
+    const {id} =useParams();
+    const promesa = new Promise(resolve=>{
         setTimeout(() => {
-            const producto =productos.find(item=>item.id===1);
-            resolve(producto)
+            resolve(productos);
+            
         }, 3000);
-    }));
+    })
+
     useEffect(()=>{
         promesa.then(resultado=>{
-            console.log(resultado);
-            
-            setItem(resultado)
+            setItem(resultado.find(item=>item.id ===Number(id)))
         })
-    })
+    },[id])
     
     return(
         <div className="container my-5">

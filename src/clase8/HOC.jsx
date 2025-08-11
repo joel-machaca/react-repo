@@ -7,6 +7,7 @@ const withFormValidation=(WrappedComponent)=>{
             const newErrors ={};
             if(!props.formData.nombre) newErrors.nombre="Ingrese un valor para el campo Nombre!";
             if(!props.formData.email) newErrors.email="Ingrese un valor para el campo Email!";
+
             setErrors(newErrors)
         }
         return(
@@ -28,12 +29,12 @@ const Form =({formData,errors,validateForm,onChange})=>{
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label className="form-label">Nombre</label>
-                <input type="text" name="nombre" className="form-control" value={formData.nombre} onChange={(e)=>onChange(e)}/>
+                <input type="text" name="nombre" className="form-control" value={formData.nombre} onChange={onChange}/>
                 <div className="form-text">{errors && errors.nombre? errors.nombre:""}</div>
             </div>
             <div className="mb-3">
                 <label className="form-label">Email</label>
-                <input type="text" name="email" className="form-control" value={formData.email} onChange={(e)=>onChange(e)}/>
+                <input type="text" name="email" className="form-control" value={formData.email} onChange={onChange}/>
                 <div className="form-text">{errors && errors.email? errors.email:""}</div>
             </div>
             <button type="submit" className="btn btn-primary">Submit</button>
