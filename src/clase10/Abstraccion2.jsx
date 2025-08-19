@@ -25,7 +25,6 @@ const Abstraccion2=()=>{
         {id:3, texto:"rosa"}
     ]
     const optionSelected=(value)=>{
-        console.log(value)
         setOption(value);
     }
     return(
