@@ -3,11 +3,10 @@ import productos from "../assets/productos.json"
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 const ItemListContainer=()=>{
-    
+
     const [items,setItems]= useState([])
     const {id}=useParams();
 
-    
     useEffect(()=>{
         const promesa = new Promise((resolve)=>{
             setTimeout(() => {
@@ -25,7 +24,6 @@ const ItemListContainer=()=>{
                     <ItemList items={items}/>
             </div>
         </div>
-        
     )
 }
 export default ItemListContainer

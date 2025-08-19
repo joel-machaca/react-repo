@@ -13,11 +13,15 @@ import Familia from './components/Familia';
 import Productos from './components/Productos';
 import PaginaPrincipal from './components/PaginaPrincipal';
 import NavBar2 from './components/NavBar2';
+import Eventos from './clase10/Eventos';
+import ItemDetail from './clase10/ItemDetail';
+import Abstraccion1 from './clase10/Abstraccion1';
+import Abstraccion2 from './clase10/Abstraccion2';
 
 function App() {
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <NavBar/>
         <Routes>
           <Route path="/"              element={<PaginaPrincipal/>}/>
@@ -27,7 +31,12 @@ function App() {
           <Route path="/item/:id"      element={<ItemDetailContainer/>}/>
         </Routes>
         <Footer/>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      {/* <Eventos/> */}
+      {/* <ItemDetail item={{id:1, nombre:"Coca cola", quantity:5, precio:2000,stock:10}} inputType='input'/> */}
+      {/* <Abstraccion1/> */}
+
+      <Abstraccion2/>
     </>
 
   )
