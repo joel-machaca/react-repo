@@ -17,26 +17,65 @@ import Eventos from './clase10/Eventos';
 import ItemDetail from './clase10/ItemDetail';
 import Abstraccion1 from './clase10/Abstraccion1';
 import Abstraccion2 from './clase10/Abstraccion2';
+import ThemeContextProvider from './components/context/ThemeContext';
+import CartContextProvider from './components/context/CartContext';
+import Cart from './components/Cart';
+
+// import ComponenteA from './Clase11/ComponenteA';
+
+
+
+// const ComponenteB=()=>{
+//   const {isDarkMode}=useContext(ThemeContext)
+//     return(
+//         <>
+//           <p className="p-1">Modo oscuro?<b>{isDarkMode?" si":" no"}</b></p>
+
+//         </>
+//     )
+// }
+// const ComponenteA=()=>{
+//   const {curso, setCurso}=useContext(ThemeContext)
+//     return (
+//       <>
+//           <p className="p-1">Curso: <b>{curso}</b></p>
+//           <button className='btn btn-dark' onClick={()=>setCurso("React JS")}>Modificar Curso</button>
+          
+//       </>
+//     )
+// }
 
 function App() {
+  // const [isDarkMode,setIsDarkMode]=useState(false)
+  // const [curso,setCurso]=useState("Desarrollo web")
   return (
     <>
-      {/* <BrowserRouter>
-        <NavBar/>
-        <Routes>
-          <Route path="/"              element={<PaginaPrincipal/>}/>
-          <Route path="/productos"     element={<NavBar2/>}/>
-          <Route path="/familia"       element={<Familia/>}/>
-          <Route path="/productos/:id"  element={<ItemListContainer/>}/>
-          <Route path="/item/:id"      element={<ItemDetailContainer/>}/>
-        </Routes>
-        <Footer/>
-      </BrowserRouter> */}
-      {/* <Eventos/> */}
-      {/* <ItemDetail item={{id:1, nombre:"Coca cola", quantity:5, precio:2000,stock:10}} inputType='input'/> */}
-      {/* <Abstraccion1/> */}
-
-      <Abstraccion2/>
+    <CartContextProvider>
+      <ThemeContextProvider>
+        <BrowserRouter>
+          <NavBar/>
+          <Routes>
+            <Route path="/"              element={<PaginaPrincipal/>}/>
+            <Route path="/productos"     element={<NavBar2/>}/>
+            <Route path="/familia"       element={<Familia/>}/>
+            <Route path="/productos/:id"  element={<ItemListContainer/>}/>
+            <Route path="/item/:id"      element={<ItemDetailContainer/>}/>
+            <Route path="/cart" element={<Cart/>}/>
+          </Routes>
+          <Footer/>
+        </BrowserRouter>
+      {/* <ThemeContext.Provider value={{isDarkMode, curso, setCurso}}>
+        <ComponenteB/>
+        <ComponenteA/>
+        </ThemeContext.Provider> */}
+{/*       
+      <ThemeContext.Consumer>
+      {a=>(
+        <p className="p-1">Modo oscuro?<b>{a?" si":" no"}</b></p>
+        )}
+        </ThemeContext.Consumer> */}
+      </ThemeContextProvider>
+    </CartContextProvider>
     </>
 
   )

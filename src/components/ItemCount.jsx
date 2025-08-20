@@ -1,22 +1,21 @@
 import { useState } from "react"
 
-const ItemCount=({productoCantidad})=>{
+const ItemCount=({stock,onAdd})=>{
     const [counter,setCounter] = useState(1)
 
     const aumentarCounter=()=>{
         setCounter(prev=>{
-            return prev<productoCantidad? prev+1:prev;
+            console.log(counter)
+            return prev<stock? prev+1:prev;
         })
     }
     const decrementarCounter=()=>{
         setCounter(prev=>{
+            console.log(counter)
             return prev>1? prev-1:prev;
         })
     }
 
-    const onAdd=()=>{
-        console.log(`tu producto se guardo en el carrito y la cantidad es ${counter}`)
-    }
 
     return(
         <div className="my-4">
@@ -26,7 +25,7 @@ const ItemCount=({productoCantidad})=>{
                 <button className="btn btn-warning" onClick={aumentarCounter}> + </button>
             </div>
             <div className="my-2">
-                <button className="btn btn-warning" onClick={onAdd}>agregar al carrito</button>
+                <button className="btn btn-warning fw-bold" onClick={()=>onAdd(counter)}>agregar al carrito</button>
             </div>
         </div>
     )

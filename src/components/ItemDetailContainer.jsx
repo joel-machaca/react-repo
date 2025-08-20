@@ -1,22 +1,33 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import productos from "../assets/productos.json"
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import ItemCount from "./ItemCount";
+import { CartContext } from "./context/CartContext";
 const ItemDetailContainer=()=>{
     
     const [item,setItem]= useState([])
     const {id} =useParams();
-    const promesa = new Promise(resolve=>{
-        setTimeout(() => {
-            resolve(productos);
-            
-        }, 3000);
-    })
-
+    const [visible,setVisible]=useState(true)
+    const { addItem }=useContext(CartContext)
+    
     useEffect(()=>{
+        const promesa = new Promise(resolve=>{
+            setTimeout(() => {
+                resolve(productos);
+                
+            }, 3000);
+        })
         promesa.then(resultado=>{
             setItem(resultado.find(item=>item.id ===Number(id)))
         })
     },[id])
+
+    const onAdd=(quantity)=>{
+        addItem(item,quantity)
+        setVisible(false)
+    }
+
+
     
     return(
         <div className="container my-5">
@@ -28,6 +39,7 @@ const ItemDetailContainer=()=>{
                     <h1 className="fw-bold">{item.title}</h1>
                     <p>{item.description}</p>
                     <p className="fw-bold">${item.price}</p>
+                    {visible?<ItemCount stock={item.stock} onAdd={onAdd}/>:<Link to={"/cart"} className="text-decoration-none btn btn-warning fw-bold">Terminar mi compra</Link>}
                 </div>
             </div>
         </div>
