@@ -3,8 +3,9 @@ import productos from "../assets/productos.json"
 import { Link, useParams } from "react-router-dom";
 import ItemCount from "./ItemCount";
 import { CartContext } from "./context/CartContext";
+import Loading from "./Loading";
 const ItemDetailContainer=()=>{
-    
+    const [loading,setLoading]=useState(true)
     const [item,setItem]= useState([])
     const {id} =useParams();
     const [visible,setVisible]=useState(true)
@@ -19,6 +20,7 @@ const ItemDetailContainer=()=>{
         })
         promesa.then(resultado=>{
             setItem(resultado.find(item=>item.id ===Number(id)))
+            setLoading(false)
         })
     },[id])
 
@@ -27,6 +29,11 @@ const ItemDetailContainer=()=>{
         setVisible(false)
     }
 
+    if(loading){
+        return(
+            <Loading/>
+        )
+    }
 
     
     return(

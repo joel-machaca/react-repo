@@ -34,8 +34,30 @@ const CartContextProvider=({children})=>{
         return cart.some(item=>item.id==id) //some devuelve true si encuentra lo pedido en este caso el id 2 , si no encuentra nos dara false
     }
 
-    return<CartContext value={{cart,addItem,removeItem,clear}}>
+    const totalProductos=()=>{
+        return cart.reduce((acc,item)=>acc += item.quantity, 0)
+    }
+    const sumaProductos=()=>{
+        return cart.reduce((acc,item)=>acc += item.price*item.quantity, 0)
+    }
+    const decrementarItem=(id)=>{
+
+        const product=cart.find(producto=>producto.id==id)
+        if(product.quantity >1){
+            product.quantity -= 1;
+            setCart([...cart])
+        }else{
+            removeItem(id)
+        }
+    }
+    const incrementarItem=(id)=>{
+            const product=cart.find(producto=>producto.id==id)
+            product.quantity += 1;
+
+            setCart([...cart])
+    }
+    return<CartContext.Provider value={{cart,addItem,removeItem,clear ,totalProductos,sumaProductos,incrementarItem,decrementarItem}}>
         {children}
-    </CartContext>
+    </CartContext.Provider>
 }
 export default CartContextProvider;

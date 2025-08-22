@@ -20,62 +20,46 @@ import Abstraccion2 from './clase10/Abstraccion2';
 import ThemeContextProvider from './components/context/ThemeContext';
 import CartContextProvider from './components/context/CartContext';
 import Cart from './components/Cart';
+import Rendering from './Clase12/Rendering';
+import Rendering2 from './Clase12/Rendering2';
+import Loading from './components/Loading';
+import Rendering3 from './Clase12/Rendering3';
+import Memo from './Clase12/Memo';
 
-// import ComponenteA from './Clase11/ComponenteA';
-
-
-
-// const ComponenteB=()=>{
-//   const {isDarkMode}=useContext(ThemeContext)
-//     return(
-//         <>
-//           <p className="p-1">Modo oscuro?<b>{isDarkMode?" si":" no"}</b></p>
-
-//         </>
-//     )
-// }
-// const ComponenteA=()=>{
-//   const {curso, setCurso}=useContext(ThemeContext)
-//     return (
-//       <>
-//           <p className="p-1">Curso: <b>{curso}</b></p>
-//           <button className='btn btn-dark' onClick={()=>setCurso("React JS")}>Modificar Curso</button>
-          
-//       </>
-//     )
-// }
 
 function App() {
-  // const [isDarkMode,setIsDarkMode]=useState(false)
-  // const [curso,setCurso]=useState("Desarrollo web")
+  
+  // const producto=  {
+  //   "id": 8,
+  //   "title": "Coca Cola Grande",
+  //   "description": "Burbujas contra el calor, contra la sed, contra el aburrimiento. Si tus comidas llevan gaseosa, están listas para enfrentar lo que sea. Elegila en tamaño regular, mediano o grande.",
+  //   "price": 6000,
+  //   "image": "https://cache-mcd-middleware.mcdonaldscupones.com/media/image/product$kcXf3XY0/200/200/original?country=ar",
+  //   "category": "bebidas",
+  //   "stock":10,
+  //   fechaModificacion:"24-04-2025"
+  // }
+
   return (
     <>
-    <CartContextProvider>
-      <ThemeContextProvider>
-        <BrowserRouter>
-          <NavBar/>
-          <Routes>
-            <Route path="/"              element={<PaginaPrincipal/>}/>
-            <Route path="/productos"     element={<NavBar2/>}/>
-            <Route path="/familia"       element={<Familia/>}/>
-            <Route path="/productos/:id"  element={<ItemListContainer/>}/>
-            <Route path="/item/:id"      element={<ItemDetailContainer/>}/>
-            <Route path="/cart" element={<Cart/>}/>
-          </Routes>
-          <Footer/>
-        </BrowserRouter>
-      {/* <ThemeContext.Provider value={{isDarkMode, curso, setCurso}}>
-        <ComponenteB/>
-        <ComponenteA/>
-        </ThemeContext.Provider> */}
-{/*       
-      <ThemeContext.Consumer>
-      {a=>(
-        <p className="p-1">Modo oscuro?<b>{a?" si":" no"}</b></p>
-        )}
-        </ThemeContext.Consumer> */}
-      </ThemeContextProvider>
-    </CartContextProvider>
+      <CartContextProvider>
+        <ThemeContextProvider>
+          <BrowserRouter>
+            <NavBar/>
+            <Routes>
+              <Route path="/"              element={<PaginaPrincipal/>}/>
+              <Route path="/productos"     element={<NavBar2/>}/>
+              <Route path="/familia"       element={<Familia/>}/>
+              <Route path="/productos/:id"  element={<ItemListContainer/>}/>
+              <Route path="/item/:id"      element={<ItemDetailContainer/>}/>
+              <Route path="/cart" element={<Cart/>}/>
+            </Routes>
+            <Footer/>
+          </BrowserRouter>
+            {/* <Rendering3 modoDark={true} clase={"text-white"}/> */}
+            {/* <Memo item={producto}/> */}
+        </ThemeContextProvider>
+      </CartContextProvider>
     </>
 
   )

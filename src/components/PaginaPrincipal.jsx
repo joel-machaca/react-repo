@@ -1,4 +1,5 @@
 import Banners from "./Banner"
+import ItemListContainer from "./ItemListContainer"
 
 import McDonalds from "./McDonalds"
 import PedirPorApps from "./PedirPorApps"
@@ -13,6 +14,7 @@ const PaginaPrincipal =()=>{
             <Servicios/>
             <PedirPorApps/>
             <Registrate/>
+            <ItemListContainer/>
         </>
     )
 }
