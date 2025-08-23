@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
-import productos from "../assets/productos.json"
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 const ItemListContainer=()=>{
     const [loading,setLoading]=useState(true);
     const [items,setItems]= useState([])
     const {id}=useParams();
 
     useEffect(()=>{
-        const promesa = new Promise((resolve)=>{
-            setTimeout(() => {
-                resolve(productos)
-            }, 3000);
-        })
-        promesa.then(resultado=>{
-            setItems(id? productos.filter(item=>item.category===id) : resultado);
-            setLoading(false)
+        const db=getFirestore()
+        const itemsCollection=collection(db,"items")
+        getDocs(itemsCollection)
+        const q= id? query(itemsCollection,(where("categoria","==",id))):itemsCollection;
+        getDocs(q)
+        .then(snapShot=>{
+            if(snapShot.size>0){
+                setItems(snapShot.docs.map(item=>({id:item.id,...item.data()})));
+                setLoading(false)
+            }else{
+                console.log("no hay documentos")
+            }
         })
     },[id])
     

@@ -23,8 +23,10 @@ import Cart from './components/Cart';
 import Rendering from './Clase12/Rendering';
 import Rendering2 from './Clase12/Rendering2';
 import Loading from './components/Loading';
-import Rendering3 from './Clase12/Rendering3';
-import Memo from './Clase12/Memo';
+
+
+import FirebaseDoc from './Clase13/FirebaseDOC';
+import FirebaseCollection from './Clase13/FirebaseCollection';
 
 
 function App() {
@@ -56,8 +58,9 @@ function App() {
             </Routes>
             <Footer/>
           </BrowserRouter>
-            {/* <Rendering3 modoDark={true} clase={"text-white"}/> */}
-            {/* <Memo item={producto}/> */}
+
+          {/* <FirebaseDoc/> */}
+          {/* <FirebaseCollection/> */}
         </ThemeContextProvider>
       </CartContextProvider>
     </>
