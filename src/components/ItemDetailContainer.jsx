@@ -48,7 +48,7 @@ const ItemDetailContainer=()=>{
                     <h1 className="fw-bold">{item.title}</h1>
                     <p>{item.description}</p>
                     <p className="fw-bold">${item.price}</p>
-                    {visible?<ItemCount stock={item.stock} onAdd={onAdd}/>:<Link to={"/cart"} className="text-decoration-none btn btn-warning fw-bold">Terminar mi compra</Link>}
+                    {visible?item.stock > 0?<ItemCount stock={item.stock} onAdd={onAdd}/>: <span className="badge text-bg-warning fw-light">SinStock</span>:<Link to={"/cart"} className="text-decoration-none btn btn-warning fw-bold">Terminar mi compra</Link>}
                 </div>
             </div>
         </div>

@@ -1,9 +1,20 @@
-import { createContext, useState } from "react";
-import products from "../../assets/productos.json"
+import { collection, getDocs, getFirestore } from "firebase/firestore";
+import { createContext, useEffect, useState } from "react";
 
 export const CartContext=createContext();
 const CartContextProvider=({children})=>{
-    const[cart,setCart]=useState([]);
+    const [cart,setCart]=useState([]);
+    const [products,setProducts]=useState([])
+
+    useEffect(()=>{
+        const db=getFirestore();
+        const itemsCollection=collection(db,"items")
+
+        getDocs(itemsCollection).then(snapShot=>{
+            setProducts(snapShot.docs.map(item=>({id:item.id, ...item.data()})))
+
+        });
+    },[])
 
     const addItem=(item,quantity)=>{
         if(isInCart(item.id)){
@@ -13,11 +24,10 @@ const CartContextProvider=({children})=>{
             console.log(product)
             setCart([...cart])
         }else{
-            const product=products.find(producto=>producto.id==item.id)
+                
+            const product=products.find(prod=>prod.id==item.id)
             product.quantity = quantity;
-            console.log(product)
             setCart([...cart,product])
-
         }
     }
 
@@ -50,11 +60,13 @@ const CartContextProvider=({children})=>{
             removeItem(id)
         }
     }
-    const incrementarItem=(id)=>{
+    const incrementarItem=(id,stock)=>{
             const product=cart.find(producto=>producto.id==id)
-            product.quantity += 1;
+            if(product.quantity<stock){
+                product.quantity += 1;
+                setCart([...cart])
+            }
 
-            setCart([...cart])
     }
     return<CartContext.Provider value={{cart,addItem,removeItem,clear ,totalProductos,sumaProductos,incrementarItem,decrementarItem}}>
         {children}
