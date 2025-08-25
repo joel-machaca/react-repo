@@ -1,7 +1,8 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { CartContext } from "./context/CartContext"
-import { addDoc, collection, doc, getDoc, getFirestore, updateDoc, writeBatch } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getFirestore, updateDoc } from "firebase/firestore"
 import SinProductos from "./SinProductos"
+import { Link } from "react-router-dom"
 
 const Checkout=()=>{
     const {cart,clear,totalProductos,sumaProductos}=useContext(CartContext)
@@ -9,12 +10,21 @@ const Checkout=()=>{
     const [email,setEmail]=useState("")
     const [telefono,setTelefono]=useState("")
     const [orderId,setOrderId]=useState("")
+    const [disabled,setDisabled]=useState(true)
+
+
     const vaciarForm=()=>{
         setNombre("");
         setEmail("");
         setTelefono("");
         clear()
     }
+
+    useEffect(()=>{
+        if((nombre !="")&&(telefono !="")&&(email !="")){
+            setDisabled(false)
+        }
+    },[nombre,email,telefono])
 
     const generarOrden=()=>{
         const buyer={name:nombre,phone:telefono,email:email}
@@ -27,34 +37,6 @@ const Checkout=()=>{
         // console.log(order)
         const db=getFirestore();
         const ordersCollection=collection(db,"orders");
-
-        //Insertar un Documento
-        // addDoc(ordersCollection,order).then(snapShot=>{
-        //     setOrderId(snapShot.id)
-        //     vaciarForm()
-        // })
-
-        //modificar un Documento
-        // const docRef=doc(db,"orders","ONlRwrUz4e72ECizgjJi");
-        // let document;
-        // getDoc(docRef).then(snapShot=>{
-        //     document={...snapShot.data()}
-        //     updateDoc(docRef,{stock:(document.stock - 1)}).then(snapShot=>{
-        //         console.log(snapShot)
-        //     })
-        // })
-
-        //actualizar documentos en lote
-        // const batch=writeBatch(db)
-        // const docRef1=doc(db,"orders","TCMgufxNOGscKpr3nkOn");
-        // const docRef2=doc(db,"orders","YnDwkxyxMHWYSqw2AJFk");
-        // const docRef3=doc(db,"orders","jVIRptfboEeE283zF5rn");
-        // batch.update(docRef1,{fecha:"30-04-2025 09:27"})
-        // batch.update(docRef2,{fecha:"30-04-2025 09:27"})
-        // batch.set(docRef3,{fecha:"30-04-2025 09:27"})
-        // batch.commit()
-        // console.log("proceso terminado");
-        
 
         //insertar un nuevo documento en order y actualizar los stock en items
         addDoc(ordersCollection,order).then(snapShot=>{
@@ -75,9 +57,10 @@ const Checkout=()=>{
         return(
             <div className="row my-5">
                 <div className="col text-center">
-                    {orderId &&<div class="alert alert-warning text-center" role="alert">
-                        <h1>Gracias por tu compra</h1>
+                    {orderId &&<div className="alert alert-warning text-center" role="alert">
+                        <h1 className="fw-bold">Gracias por tu compra</h1>
                         <h3>Tu numero de compra es: <b>{orderId}</b></h3>
+                        <Link to={"/"} className="btn btn-warning fw-bold my-3">Ir a la Pagina Principal</Link>
                     </div>}
                 </div>
             </div>
@@ -105,7 +88,7 @@ const Checkout=()=>{
                             <label htmlFor="exampleInputEmail1" className="form-label">Telefono</label>
                             <input type="text" className="form-control" value={telefono} onInput={(e)=>setTelefono(e.target.value)}/>
                         </div>
-                        <button type="button" className="btn btn-primary" onClick={generarOrden}>Generar Order</button>
+                        <button type="button" className="btn btn-primary" onClick={generarOrden} disabled={disabled?"disabled":""}>Generar Order</button>
                     </form>
                 </div>
                 <div className="col-md-6">
@@ -142,7 +125,7 @@ const Checkout=()=>{
             </div>
             <div className="row my-5">
                 <div className="col text-center">
-                    {orderId &&<div class="alert alert-warning text-center" role="alert">
+                    {orderId &&<div className="alert alert-warning text-center" role="alert">
                         <h1>Gracias por tu compra</h1>
                         <h3>Tu numero de compra es: <b>{orderId}</b></h3>
                     </div>}

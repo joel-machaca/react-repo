@@ -4,6 +4,7 @@ import ItemCount from "./ItemCount";
 import { CartContext } from "./context/CartContext";
 import Loading from "./Loading";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
+import Error404 from "./Error404";
 const ItemDetailContainer=()=>{
     const [loading,setLoading]=useState(true)
     const [item,setItem]= useState([])
@@ -16,12 +17,10 @@ const ItemDetailContainer=()=>{
         const docRef=doc(db,"items",id)
         getDoc(docRef)
         .then(snapShot=>{
+            setLoading(false)
             if(snapShot.exists()){
                 const product={id:snapShot.id,...snapShot.data()}
                 setItem(product)
-                setLoading(false)
-            }else{
-                console.log("el documento no existe")
             }
         })
     },[id])
@@ -36,7 +35,11 @@ const ItemDetailContainer=()=>{
             <Loading/>
         )
     }
-
+    if(!item.title){
+        return(
+            <Error404 mensaje={"no existe producto ingresado"}/>
+        )
+    }
     
     return(
         <div className="container my-5">

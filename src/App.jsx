@@ -10,6 +10,7 @@ import ThemeContextProvider from './components/context/ThemeContext';
 import CartContextProvider from './components/context/CartContext';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
+import Error404 from './components/Error404';
 
 
 
@@ -31,6 +32,7 @@ function App() {
               <Route path="/item/:id"      element={<ItemDetailContainer/>}/>
               <Route path="/cart" element={<Cart/>}/>
               <Route path="/checkout" element={<Checkout/>}/>
+              <Route path="*" element={<Error404/>}/>
             </Routes>
             <Footer/>
           </BrowserRouter>

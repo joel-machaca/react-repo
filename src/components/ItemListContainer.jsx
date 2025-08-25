@@ -3,32 +3,42 @@ import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
 import Loading from "./Loading";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import Error404 from "./Error404";
 const ItemListContainer=()=>{
     const [loading,setLoading]=useState(true);
     const [items,setItems]= useState([])
     const {id}=useParams();
+    console.log(id)
 
     useEffect(()=>{
         const db=getFirestore()
         const itemsCollection=collection(db,"items")
-        console.log(id)
         getDocs(itemsCollection)
         const q= id? query(itemsCollection,(where("category","==",id))):itemsCollection;
         getDocs(q)
         .then(snapShot=>{
+            setLoading(false)
             if(snapShot.size>0){
                 setItems(snapShot.docs.map(item=>({id:item.id,...item.data()})));
-                setLoading(false)
-            }else{
-                console.log("no hay documentos")
             }
         })
     },[id])
     
+    if(loading){
+        return(
+            <Loading/>
+        )
+    }
+    if(items.length== 0){
+        return(
+            <Error404 mensaje="no hay productos para esta categoria"/>
+        )
+    }
+    
     return(
         <div className="container my-5">
             <div className="row">
-                    {loading?<Loading/>:<ItemList items={items}/>}
+                    <ItemList items={items}/>
             </div>
         </div>
     )
