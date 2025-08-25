@@ -21,7 +21,6 @@ const CartContextProvider=({children})=>{
             
             const product=cart.find(producto=>producto.id==item.id)
             product.quantity += quantity;
-            console.log(product)
             setCart([...cart])
         }else{
                 

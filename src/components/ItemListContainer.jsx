@@ -8,7 +8,6 @@ const ItemListContainer=()=>{
     const [loading,setLoading]=useState(true);
     const [items,setItems]= useState([])
     const {id}=useParams();
-    console.log(id)
 
     useEffect(()=>{
         const db=getFirestore()

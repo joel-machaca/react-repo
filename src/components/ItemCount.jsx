@@ -5,13 +5,12 @@ const ItemCount=({stock,onAdd})=>{
 
     const aumentarCounter=()=>{
         setCounter(prev=>{
-            console.log(counter)
+
             return prev<stock? prev+1:prev;
         })
     }
     const decrementarCounter=()=>{
         setCounter(prev=>{
-            console.log(counter)
             return prev>1? prev-1:prev;
         })
     }

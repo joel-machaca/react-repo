@@ -18,14 +18,9 @@ const FirebaseDoc=()=>{
         getDoc(productoRef)
         .then(snapShot=>{
             if(snapShot.exists()){
-                console.log(snapShot.id)
-                console.log(snapShot.data())
                 let product ={id:snapShot.id, ...snapShot.data()}
-                console.log(product)
                 setItem(product)
                 setLoading(false)
-            }else{
-                console.log("el documento no existe")
             }
         })
     },[])
